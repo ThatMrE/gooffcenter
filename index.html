@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offcenter Festival — 14 Days of Art, Music & Innovation in Abandoned Spaces</title>
+  <meta name="description" content="Offcenter is a two-week festival celebrating art, music, and innovation in abandoned spaces. Summer 2027 in Detroit, MI.">
+  <meta property="og:title" content="Offcenter Festival — Summer 2027 in Detroit">
+  <meta property="og:description" content="14 days of art, music & innovation in abandoned spaces. 200+ artists. Two weeks. One transformed city.">
+  <meta property="og:image" content="https://gooff.center/og-image.jpg">
+  <meta property="og:url" content="https://gooff.center">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Offcenter Festival">
+  <meta name="twitter:description" content="Summer 2027 in Detroit. 14 days. 200+ artists. One incredible festival.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='65' cy='65' r='30' fill='none' stroke='%237C5CFC' stroke-width='3'/><circle cx='50' cy='50' r='4' fill='%23FFD93D'/></svg>">
+
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=DM+Mono:wght@400&family=Tektur:wght@400;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --coral: #FF6B6B;
+      --violet: #7C5CFC;
+      --yellow: #FFD93D;
+      --mint: #6BCB77;
+      --sky: #4D96FF;
+      --dark: #1A1A2E;
+      --cream: #FFF8F0;
+      --grey: #E8E4E0;
+      --text-dark: #1A1A2E;
+      --text-light: #6B6B7B;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    h1 { font-size: clamp(3rem, 8vw, 7rem); }
+    h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+    h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+    .mono {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    .display {
+      font-family: 'Tektur', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    header.scrolled {
+      background: rgba(255, 248, 240, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 0.2rem;
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      font-weight: 900;
+      font-family: 'Big Shoulders Display', sans-serif;
+    }
+
+    .logo-off {
+      color: var(--coral);
+      transform: translateX(-3px);
+      letter-spacing: -0.05em;
+    }
+
+    .logo-center {
+      font-family: 'DM Mono', monospace;
+      color: var(--text-dark);
+      font-size: 0.65em;
+      letter-spacing: 0.08em;
+      font-weight: 400;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--coral);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--coral);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 248, 240, 0.95) 0%, rgba(255, 248, 240, 0.9) 100%);
+      padding: 0 2rem;
+    }
+
+    .hero-background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 0;
+      opacity: 0.15;
+    }
+
+    .hero-circle {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .hero-circle-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .confetti {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .confetti.dot1 {
+      width: 12px;
+      height: 12px;
+      background: var(--coral);
+      top: 15%;
+      left: 10%;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .confetti.dot2 {
+      width: 8px;
+      height: 8px;
+      background: var(--yellow);
+      top: 25%;
+      right: 15%;
+      animation: float 5s ease-in-out infinite 0.5s;
+    }
+
+    .confetti.dot3 {
+      width: 10px;
+      height: 10px;
+      background: var(--mint);
+      bottom: 20%;
+      left: 12%;
+      animation: float 4.5s ease-in-out infinite 1s;
+    }
+
+    .confetti.dot4 {
+      width: 9px;
+      height: 9px;
+      background: var(--sky);
+      bottom: 30%;
+      right: 10%;
+      animation: float 5.5s ease-in-out infinite 0.7s;
+    }
+
+    .confetti.dot5 {
+      width: 11px;
+      height: 11px;
+      background: var(--violet);
+      top: 35%;
+      left: 8%;
+      animation: float 4.2s ease-in-out infinite 1.2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-20px);
+        opacity: 0.7;
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-title {
+      margin-bottom: 1.5rem;
+      line-height: 1;
+    }
+
+    .hero-off {
+      color: var(--coral);
+      display: block;
+      transform: translateX(-20px);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-center {
+      display: block;
+      color: var(--text-dark);
+      font-family: 'DM Mono', monospace;
+      font-weight: 400;
+      font-size: 0.5em;
+      letter-spacing: 0.15em;
+      margin-top: 0.5rem;
+      transform: translateX(20px);
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      letter-spacing: 0.05em;
+      margin: 2rem 0;
+      max-width: 600px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .hero-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+    }
+
+    .btn-primary {
+      background: var(--coral);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #FF5252;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-dark);
+      border: 2px solid var(--text-dark);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--coral);
+      color: var(--coral);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-title-small {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title-main {
+      display: inline-flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .section-title-small-text {
+      font-family: 'DM Mono', monospace;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    .section-title-large {
+      color: var(--coral);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      font-weight: 400;
+    }
+
+    /* About Section */
+    .about {
+      background: white;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-dark);
+    }
+
+    .about-text p {
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text strong {
+      font-weight: 600;
+      color: var(--coral);
+    }
+
+    .reference-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .ref-card {
+      background: white;
+      border-left: 4px solid;
+      padding: 2rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .ref-card:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .ref-card.coral {
+      border-color: var(--coral);
+    }
+
+    .ref-card.mint {
+      border-color: var(--mint);
+    }
+
+    .ref-card.yellow {
+      border-color: var(--yellow);
+    }
+
+    .ref-card h4 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .ref-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* Lineup Section */
+    .lineup {
+      background: white;
+    }
+
+    .lineup-subtitle {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--grey);
+      background: transparent;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--coral);
+      color: var(--coral);
+    }
+
+    .tab-btn.active {
+      background: var(--coral);
+      color: white;
+      border-color: var(--coral);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .headliners {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .artist-card {
+      background: #f8f6f4;
+      padding: 2rem;
+      border-radius: 4px;
+      border-left: 4px solid var(--coral);
+      transition: all 0.3s ease;
+    }
+
+    .artist-card.music-1 { border-color: var(--coral); }
+    .artist-card.music-2 { border-color: var(--violet); }
+    .artist-card.music-3 { border-color: var(--sky); }
+    .artist-card.music-4 { border-color: var(--mint); }
+
+    .artist-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .artist-name {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .artist-genre {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .mid-tier {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .mid-tier-card {
+      background: #f8f6f4;
+      padding: 1.5rem;
+      border-radius: 4px;
+      border-top: 3px solid var(--coral);
+    }
+
+    .mid-tier-card:nth-child(2) { border-top-color: var(--violet); }
+    .mid-tier-card:nth-child(3) { border-top-color: var(--yellow); }
+    .mid-tier-card:nth-child(4) { border-top-color: var(--mint); }
+    .mid-tier-card:nth-child(5) { border-top-color: var(--sky); }
+    .mid-tier-card:nth-child(6) { border-top-color: var(--coral); }
+
+    .mid-tier-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .emerging-note {
+      text-align: center;
+      color: var(--text-light);
+      font-style: italic;
+      padding: 2rem;
+      background: #f8f6f4;
+      border-radius: 4px;
+    }
+
+    .installations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .install-item {
+      background: #f8f6f4;
+      padding: 1.5rem;
+      border-radius: 4px;
+      border-top: 3px solid var(--coral);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .install-item:nth-child(2) { border-top-color: var(--violet); }
+    .install-item:nth-child(3) { border-top-color: var(--yellow); }
+    .install-item:nth-child(4) { border-top-color: var(--mint); }
+    .install-item:nth-child(5) { border-top-color: var(--sky); }
+    .install-item:nth-child(6) { border-top-color: var(--coral); }
+    .install-item:nth-child(7) { border-top-color: var(--violet); }
+    .install-item:nth-child(8) { border-top-color: var(--yellow); }
+
+    .visual-artists-note {
+      background: #f8f6f4;
+      padding: 2rem;
+      border-radius: 4px;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    .keynotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .keynote-card {
+      background: #f8f6f4;
+      padding: 1.5rem;
+      border-radius: 4px;
+      border-left: 4px solid var(--coral);
+    }
+
+    .keynote-card:nth-child(2) { border-left-color: var(--violet); }
+    .keynote-card:nth-child(3) { border-left-color: var(--sky); }
+    .keynote-card:nth-child(4) { border-left-color: var(--mint); }
+    .keynote-card:nth-child(5) { border-left-color: var(--yellow); }
+
+    .keynote-speaker {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .keynote-topic {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .workshops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .workshop-item {
+      background: #f8f6f4;
+      padding: 1.5rem;
+      border-radius: 4px;
+      border-top: 3px solid var(--coral);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .workshop-item:nth-child(2) { border-top-color: var(--violet); }
+    .workshop-item:nth-child(3) { border-top-color: var(--yellow); }
+    .workshop-item:nth-child(4) { border-top-color: var(--mint); }
+    .workshop-item:nth-child(5) { border-top-color: var(--sky); }
+    .workshop-item:nth-child(6) { border-top-color: var(--coral); }
+    .workshop-item:nth-child(7) { border-top-color: var(--violet); }
+    .workshop-item:nth-child(8) { border-top-color: var(--yellow); }
+
+    .food-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .food-content p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .food-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .food-highlight {
+      background: #f8f6f4;
+      padding: 1.5rem;
+      border-radius: 4px;
+      border-top: 3px solid var(--coral);
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .food-highlight:nth-child(2) { border-top-color: var(--violet); }
+    .food-highlight:nth-child(3) { border-top-color: var(--yellow); }
+
+    /* Location Section */
+    .location {
+      background: white;
+    }
+
+    .location-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .stat-number {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 3.5rem;
+      color: var(--coral);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .location-description {
+      text-align: center;
+      max-width: 700px;
+      margin: 2rem auto;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-dark);
+    }
+
+    .location-footer {
+      text-align: center;
+      color: var(--text-light);
+      font-style: italic;
+      margin-top: 2rem;
+    }
+
+    /* Tickets Section */
+    .tickets {
+      background: linear-gradient(135deg, rgba(255, 248, 240, 0.5) 0%, rgba(252, 247, 241, 0.5) 100%);
+    }
+
+    .ticket-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ticket-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      border-top: 5px solid var(--coral);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .ticket-card.party-week {
+      border-top-color: var(--sky);
+    }
+
+    .ticket-card.all-access {
+      border-top-color: var(--coral);
+      transform: scale(1.05);
+    }
+
+    .ticket-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .ticket-card.all-access:hover {
+      transform: scale(1.05) translateY(-10px);
+    }
+
+    .best-value {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--coral);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .ticket-name {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .ticket-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--coral);
+      margin-bottom: 0.3rem;
+    }
+
+    .ticket-limit {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ticket-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .ticket-features li {
+      padding: 0.5rem 0;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .ticket-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--mint);
+      font-weight: bold;
+    }
+
+    .form-section {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      max-width: 600px;
+      margin: 3rem auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--grey);
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--coral);
+      box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .form-note {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .success-message {
+      display: none;
+      background: #d4f4dd;
+      border-left: 4px solid var(--mint);
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin-top: 1.5rem;
+      text-align: center;
+      color: #2d5a3d;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    /* Sponsors Section */
+    .sponsors {
+      background: white;
+    }
+
+    .sponsors-intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .sponsor-tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .sponsor-tier {
+      background: #f8f6f4;
+      padding: 2rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--coral);
+    }
+
+    .sponsor-tier:nth-child(2) { border-left-color: var(--violet); }
+    .sponsor-tier:nth-child(3) { border-left-color: var(--mint); }
+
+    .sponsor-tier h4 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .sponsor-tier p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .sponsor-contact {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--grey);
+    }
+
+    .sponsor-email {
+      color: var(--coral);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .sponsor-email:hover {
+      text-decoration: underline;
+    }
+
+    /* FAQ Section */
+    .faq {
+      background: white;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--grey);
+      padding: 1.5rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      color: var(--coral);
+    }
+
+    .faq-toggle {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-toggle.open {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      display: none;
+      margin-top: 1rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      animation: slideDown 0.3s ease;
+    }
+
+    .faq-answer.open {
+      display: block;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: #ccc;
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.3rem;
+    }
+
+    .footer-logo-off {
+      color: var(--coral);
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+    }
+
+    .footer-logo-center {
+      font-family: 'DM Mono', monospace;
+      color: #999;
+      font-size: 0.5em;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      color: #999;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--coral);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-social a {
+      color: #999;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .footer-social a:hover {
+      color: var(--coral);
+    }
+
+    .footer-email {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .footer-email:hover {
+      color: var(--coral);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    .footer-circle {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--coral);
+      border-radius: 50%;
+      position: relative;
+      margin-top: 1rem;
+    }
+
+    .footer-circle::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--yellow);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      section {
+        padding: 4rem 2rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .ticket-card.all-access {
+        transform: scale(1);
+      }
+
+      .ticket-card.all-access:hover {
+        transform: translateY(-10px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(255, 248, 240, 0.98);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        gap: 1rem;
+        z-index: 999;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      nav a {
+        padding: 0.5rem 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-off {
+        transform: translateX(-10px);
+      }
+
+      .hero-center {
+        transform: translateX(10px);
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .hero-circle {
+        width: 200px;
+        height: 200px;
+      }
+
+      section {
+        padding: 3rem 1.5rem;
+      }
+
+      .section-title-main {
+        flex-direction: column;
+      }
+
+      .location-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ticket-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .tabs {
+        gap: 0.5rem;
+      }
+
+      .tab-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      h1 { font-size: clamp(2rem, 6vw, 4rem); }
+      h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+      h3 { font-size: clamp(1.2rem, 2.5vw, 1.8rem); }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      .logo {
+        font-size: 1rem;
+      }
+
+      .hero {
+        padding: 0 1rem;
+      }
+
+      .confetti {
+        display: none;
+      }
+
+      .hero-circle {
+        width: 150px;
+        height: 150px;
+        opacity: 0.3;
+      }
+
+      .hero-tagline {
+        font-size: 0.9rem;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+
+      .location-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="logo-off">OFF</span><span class="logo-center">CENTER</span>
+    </div>
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="nav">
+      <a href="#about">About</a>
+      <a href="#lineup">Lineup</a>
+      <a href="#location">Location</a>
+      <a href="#tickets">Tickets</a>
+      <a href="#sponsors">Sponsors</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-background">
+        <div class="confetti dot1"></div>
+        <div class="confetti dot2"></div>
+        <div class="confetti dot3"></div>
+        <div class="confetti dot4"></div>
+        <div class="confetti dot5"></div>
+        <div class="hero-circle">
+          <svg class="hero-circle-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="120" cy="120" r="70" fill="none" stroke="#7C5CFC" stroke-width="3" opacity="0.3"/>
+            <circle cx="100" cy="100" r="3" fill="#FFD93D"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="hero-off">OFF</span>
+          <span class="hero-center">CENTER</span>
+        </h1>
+        <p class="hero-tagline">14 DAYS OF ART, MUSIC & INNOVATION IN ABANDONED SPACES</p>
+        <div class="hero-date">SUMMER 2027 · DETROIT, MI</div>
+        <div class="hero-buttons">
+          <a href="#tickets" class="btn btn-primary">GET EARLY BIRD TICKETS</a>
+          <a href="#about" class="btn btn-secondary">Learn more ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="section-title">
+        <div class="section-title-main">
+          <span class="section-title-small-text">WHAT IS</span>
+          <h2 class="section-title-large">OFFCENTER</h2>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="about-text">
+          <p><strong>Two weeks. One abandoned place. Hundreds of artists. Everything stays.</strong></p>
+          <p><strong>Build Week:</strong> Artists arrive from around the world to transform abandoned spaces into galleries, stages, and installations. We work together to create something impossible in a place nobody expected.</p>
+          <p><strong>Party Week:</strong> World-class music, talks, workshops, and food celebrating what we built. The city comes alive.</p>
+          <p><strong>The Legacy:</strong> When we leave, every piece of art, every installation, every mural stays behind for the community. This isn't temporary. This is permanent transformation.</p>
+        </div>
+
+        <div class="reference-cards">
+          <div class="ref-card coral">
+            <h4>Berlin Wall</h4>
+            <p>When the wall fell, the first thing people did was paint it. That's the spirit of Offcenter.</p>
+          </div>
+          <div class="ref-card mint">
+            <h4>Underground Festivals</h4>
+            <p>The underground proved that the "wrong" place can be the perfect place for art and culture.</p>
+          </div>
+          <div class="ref-card yellow">
+            <h4>Burning Man Spirit</h4>
+            <p>Build something impossible. Celebrate together. Give it away to the world.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lineup Section -->
+    <section id="lineup" class="lineup">
+      <div class="section-title">
+        <h2>THE LINEUP</h2>
+      </div>
+      <div class="section-subtitle lineup-subtitle">200+ ARTISTS ACROSS 4 TRACKS</div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="music">MUSIC</button>
+        <button class="tab-btn" data-tab="art">ART</button>
+        <button class="tab-btn" data-tab="innovation">INNOVATION</button>
+        <button class="tab-btn" data-tab="food">FOOD & CULTURE</button>
+      </div>
+
+      <!-- Music Tab -->
+      <div id="music" class="tab-content active">
+        <h3 style="margin-bottom: 2rem;">HEADLINERS</h3>
+        <div class="headliners">
+          <div class="artist-card music-1">
+            <div class="artist-name">Massive Attack</div>
+            <div class="artist-genre">Electronic / Trip-Hop</div>
+          </div>
+          <div class="artist-card music-2">
+            <div class="artist-name">Aphex Twin</div>
+            <div class="artist-genre">Experimental Electronic</div>
+          </div>
+          <div class="artist-card music-3">
+            <div class="artist-name">Jon Hopkins</div>
+            <div class="artist-genre">Electronic / Ambient</div>
+          </div>
+          <div class="artist-card music-4">
+            <div class="artist-name">Richie Hawtin</div>
+            <div class="artist-genre">Minimal Techno</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 3rem; margin-bottom: 2rem;">MID-TIER & EMERGING ARTISTS</h3>
+        <div class="mid-tier">
+          <div class="mid-tier-card"><div class="mid-tier-name">Arca</div></div>
+          <div class="mid-tier-card"><div class="mid-tier-name">Thundercat</div></div>
+          <div class="mid-tier-card"><div class="mid-tier-name">Nia Archives</div></div>
+          <div class="mid-tier-card"><div class="mid-tier-name">Ryoji Ikeda</div></div>
+          <div class="mid-tier-card"><div class="mid-tier-name">Hiromi Uehara</div></div>
+          <div class="mid-tier-card"><div class="mid-tier-name">Rokia Traoré</div></div>
+        </div>
+
+        <div class="emerging-note">+ 20 emerging and local acts announced monthly on our socials</div>
+      </div>
+
+      <!-- Art Tab -->
+      <div id="art" class="tab-content">
+        <h3 style="margin-bottom: 2rem;">LARGE-SCALE INSTALLATIONS</h3>
+        <div class="installations-grid">
+          <div class="install-item">Light Installation</div>
+          <div class="install-item">Kinetic Sculpture</div>
+          <div class="install-item">Immersive Soundscape</div>
+          <div class="install-item">3D Projection Mapping</div>
+          <div class="install-item">VR/AR Experience</div>
+          <div class="install-item">Bio-Interactive Installation</div>
+          <div class="install-item">Parametric Architecture</div>
+          <div class="install-item">Fiber Installation</div>
+        </div>
+
+        <h3 style="margin-top: 3rem; margin-bottom: 2rem;">VISUAL ARTISTS</h3>
+        <div class="visual-artists-note">30+ muralists, street artists, sculptors, digital artists, and photographers transforming 15 abandoned spaces</div>
+      </div>
+
+      <!-- Innovation Tab -->
+      <div id="innovation" class="tab-content">
+        <h3 style="margin-bottom: 2rem;">KEYNOTE SPEAKERS</h3>
+        <div class="keynotes-grid">
+          <div class="keynote-card">
+            <div class="keynote-speaker">Dr. Jane McGonigal</div>
+            <div class="keynote-topic">Game Design for Social Good</div>
+          </div>
+          <div class="keynote-card">
+            <div class="keynote-speaker">Candy Chang</div>
+            <div class="keynote-topic">Public Space Design & Placemaking</div>
+          </div>
+          <div class="keynote-card">
+            <div class="keynote-speaker">Bjarke Ingels</div>
+            <div class="keynote-topic">Architecture for Urban Innovation</div>
+          </div>
+          <div class="keynote-card">
+            <div class="keynote-speaker">Elizabeth Alexander</div>
+            <div class="keynote-topic">Arts & Community Healing</div>
+          </div>
+          <div class="keynote-card">
+            <div class="keynote-speaker">Stephanie Dinkins</div>
+            <div class="keynote-topic">AI, Race & Creative Technology</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 3rem; margin-bottom: 2rem;">WORKSHOPS</h3>
+        <div class="workshops-grid">
+          <div class="workshop-item">Music Production for Social Impact</div>
+          <div class="workshop-item">DIY Community Art Installation</div>
+          <div class="workshop-item">Generative AI for Visual Arts</div>
+          <div class="workshop-item">VR/AR for Cultural Expression</div>
+          <div class="workshop-item">Urban Placemaking: Concept to Reality</div>
+          <div class="workshop-item">Funding & Grants for Creative Projects</div>
+          <div class="workshop-item">Building Inclusive Communities</div>
+          <div class="workshop-item">Art as Urban Activism</div>
+        </div>
+      </div>
+
+      <!-- Food & Culture Tab -->
+      <div id="food" class="tab-content">
+        <div class="food-content">
+          <p>Food is at the heart of Offcenter. We partner with Detroit's best local chefs and food artists to celebrate culinary innovation and cultural traditions.</p>
+          <p>From live cooking demonstrations featuring immigrant cuisine to deep conversations about food justice, this track brings communities together through shared meals and storytelling.</p>
+
+          <div class="food-highlights">
+            <div class="food-highlight">Local Chef Partnerships</div>
+            <div class="food-highlight">Live Cooking Demonstrations</div>
+            <div class="food-highlight">Food Justice Panels</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+      <div class="section-title">
+        <h2>DETROIT, MI</h2>
+        <div class="section-subtitle" style="margin-top: 0.5rem;">YEAR ONE</div>
+      </div>
+
+      <div class="location-stats">
+        <div class="stat-card">
+          <div class="stat-number">15</div>
+          <div class="stat-label">Abandoned Spaces Activated</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Artists Participating</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">10K</div>
+          <div class="stat-label">Attendees Expected</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">$5M+</div>
+          <div class="stat-label">Economic Impact</div>
+        </div>
+      </div>
+
+      <div class="location-description">
+        Detroit's massive inventory of abandoned industrial buildings, vibrant arts community, and proven track record of creative placemaking make it the perfect launchpad. This is where Offcenter begins.
+      </div>
+
+      <div class="location-footer">
+        Future cities announced annually based on data-driven analysis of where festivals can create the most impact.
+      </div>
+    </section>
+
+    <!-- Tickets Section -->
+    <section id="tickets" class="tickets">
+      <div class="section-title">
+        <h2>GET YOUR BADGE</h2>
+      </div>
+
+      <div class="ticket-cards">
+        <div class="ticket-card">
+          <div class="ticket-name">BUILD WEEK BADGE</div>
+          <div class="ticket-price">$150</div>
+          <div class="ticket-limit">Limited to 3,000</div>
+          <ul class="ticket-features">
+            <li>Access to all Build Week events</li>
+            <li>Workshop participation</li>
+            <li>Community meals</li>
+            <li>Networking with 200+ artists</li>
+          </ul>
+        </div>
+
+        <div class="ticket-card party-week">
+          <div class="ticket-name">PARTY WEEK BADGE</div>
+          <div class="ticket-price">$250</div>
+          <div class="ticket-limit">Limited to 7,000</div>
+          <ul class="ticket-features">
+            <li>All Party Week performances</li>
+            <li>Innovation talks & panels</li>
+            <li>Food & culture events</li>
+            <li>Access to all installations</li>
+          </ul>
+        </div>
+
+        <div class="ticket-card all-access">
+          <div class="best-value">BEST VALUE</div>
+          <div class="ticket-name">ALL ACCESS BADGE</div>
+          <div class="ticket-price">$350</div>
+          <div class="ticket-limit">Limited to 2,000</div>
+          <ul class="ticket-features">
+            <li>Everything in Build + Party</li>
+            <li>VIP artist meetups</li>
+            <li>Opening & closing ceremonies</li>
+            <li>Priority workshop registration</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 style="text-align: center; margin-bottom: 1.5rem;">EARLY BIRD SIGNUP</h3>
+        <form id='earlyBirdForm' method='POST' name='early-bird-tickets'>
+          <input type="hidden" name="form-name" value="early-bird-tickets">
+          <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="badge">Badge Preference</label>
+            <select id="badge" name="badge" required>
+              <option value="">Select a badge</option>
+              <option value="Build Week Badge">Build Week Badge</option>
+              <option value="Party Week Badge">Party Week Badge</option>
+              <option value="All Access Badge">All Access Badge</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="source">How did you hear about us?</label>
+            <select id="source" name="source" required>
+              <option value="">Select an option</option>
+              <option value="Social Media">Social Media</option>
+              <option value="Friend">Friend</option>
+              <option value="Press">Press</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">RESERVE MY SPOT</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+          <strong>Success!</strong> We've received your information. Early bird pricing reservations open January 2027.
+        </div>
+
+        <div class="form-note">Early bird pricing. Final ticket sales open January 2027.</div>
+      </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="sponsors">
+      <div class="section-title">
+        <h2>PARTNER WITH US</h2>
+      </div>
+
+      <div class="sponsors-intro">
+        Offcenter connects brands with 10,000 creative professionals, innovators, and culture makers. Be part of something bigger.
+      </div>
+
+      <div class="sponsor-tiers">
+        <div class="sponsor-tier">
+          <h4>PRESENTING PARTNER</h4>
+          <p><strong>$100K+</strong></p>
+          <p>Logo on all materials. VIP access. Keynote speaking slot. Naming rights opportunity.</p>
+        </div>
+
+        <div class="sponsor-tier">
+          <h4>TRACK SPONSOR</h4>
+          <p><strong>$25K–$50K</strong></p>
+          <p>Brand an entire track. On-site activation. Featured in programming. Social amplification.</p>
+        </div>
+
+        <div class="sponsor-tier">
+          <h4>COMMUNITY PARTNER</h4>
+          <p><strong>$5K–$10K</strong></p>
+          <p>Logo placement. Social mentions. Event tickets. Community impact recognition.</p>
+        </div>
+      </div>
+
+      <div class="sponsor-contact">
+        <p>Interested? <a href="mailto:partnerships@gooff.center" class="sponsor-email">partnerships@gooff.center</a></p>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+      <div class="section-title">
+        <h2>FREQUENTLY ASKED</h2>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What is Offcenter?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Offcenter is a two-week festival split into Build Week and Party Week. During Build Week, 200+ artists transform 15 abandoned spaces into galleries, stages, and installations. During Party Week, we celebrate with world-class music, talks, workshops, and food. Everything the artists create stays behind for the community.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Where is it?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Year 1 of Offcenter is in Detroit, MI. Detroit was selected because of its incredible inventory of abandoned industrial buildings, vibrant arts community, and proven track record of creative placemaking. Future cities will be announced annually based on data-driven analysis of where the festival can create the most impact.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>When is it?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Offcenter happens Summer 2027. Exact dates will be announced in Q1 2027. Early bird ticket reservations open January 2027, with final public sales beginning in March.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What happens to the art?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Everything stays. Murals, installations, sculptures, light installations—all the art created during Offcenter becomes permanent. This is a lasting gift to Detroit. We're not creating temporary spectacle; we're creating permanent transformation.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Do I need to be an artist to attend?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">No! Build Week welcomes volunteers, observers, and anyone curious to see what's happening. Party Week is open to all badge holders. You don't need to create art to be part of the movement—your energy and presence matter.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is it like Burning Man?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">We share the spirit of radical creation, generosity, and community with Burning Man. But Offcenter is fundamentally different: it happens in real cities, in real buildings. And everything we build stays. We're reimagining the future of urban spaces while enriching the communities we work in.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I apply as an artist?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Artist applications open October 2026. All disciplines welcome—visual artists, musicians, architects, performers, food artists, and more. Email <a href="mailto:artists@gooff.center" style="color: var(--coral);">artists@gooff.center</a> to be added to our artist mailing list.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can my company sponsor?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Absolutely. We offer sponsorship opportunities at multiple tiers: Presenting Partner ($100K+), Track Sponsor ($25K–$50K), and Community Partner ($5K–$10K). Email <a href="mailto:partnerships@gooff.center" style="color: var(--coral);">partnerships@gooff.center</a> to request our full sponsor deck.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <span class="footer-logo-off">OFF</span><span class="footer-logo-center">CENTER</span>
+    </div>
+    <div class="footer-tagline">A festival of creation in abandoned spaces</div>
+
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#lineup">Lineup</a>
+      <a href="#location">Location</a>
+      <a href="#tickets">Tickets</a>
+      <a href="#sponsors">Sponsors</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+    <div class="footer-social">
+      <a href="#" title="Instagram">Instagram</a>
+      <a href="#" title="Twitter">Twitter/X</a>
+      <a href="#" title="TikTok">TikTok</a>
+    </div>
+
+    <div>
+      <a href="mailto:hello@gooff.center" class="footer-email">hello@gooff.center</a>
+    </div>
+
+    <div class="footer-circle"></div>
+
+    <div class="footer-bottom">
+      © 2026 Offcenter Festival. All rights reserved. · <a href="#" style="color: #666; text-decoration: none;">Privacy</a> · <a href="#" style="color: #666; text-decoration: none;">Terms</a>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation & Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+
+    // Header scroll effect
+    const header = document.querySelector('header');
+    const hero = document.querySelector('.hero');
+    const heroHeight = hero.offsetHeight;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Lineup tabs
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tabName = button.getAttribute('data-tab');
+
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        button.classList.add('active');
+        document.getElementById(tabName).classList.add('active');
+      });
+    });
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const toggle = item.querySelector('.faq-toggle');
+
+      question.addEventListener('click', () => {
+        const isOpen = answer.classList.contains('open');
+
+        faqItems.forEach(otherItem => {
+          otherItem.querySelector('.faq-answer').classList.remove('open');
+          otherItem.querySelector('.faq-toggle').classList.remove('open');
+        });
+
+        if (!isOpen) {
+          answer.classList.add('open');
+          toggle.classList.add('open');
+        }
+      });
+    });
+
+    // Form handling
+    const form = document.getElementById('earlyBirdForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData)
+      })
+      .then(() => {
+        form.style.display = 'none';
+        successMessage.classList.add('show');
+      })
+      .catch(error => {
+        console.error('Form submission error:', error);
+        alert('There was an issue submitting your form. Please try again.');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
