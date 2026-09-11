@@ -474,7 +474,18 @@
       height: 46vw;
       opacity: .12;
       pointer-events: none;
+      transition: opacity .6s ease;
     }
+    .tickets-mark .oc-dot,
+    .tickets-mark .oc-ring,
+    .tickets-mark .oc-x {
+      transform-origin: 75px 75px;
+      transition: transform .6s cubic-bezier(.34, 1.56, .64, 1);
+    }
+    .tickets:hover .tickets-mark { opacity: .18; }
+    .tickets:hover .tickets-mark .oc-dot { transform: rotate(360deg); }
+    .tickets:hover .tickets-mark .oc-ring { transform: rotate(-90deg) scale(1.08); }
+    .tickets:hover .tickets-mark .oc-x { transform: rotate(45deg); }
     .tickets-head {
       position: relative;
       padding-left: max(var(--gut), 52vw);
@@ -546,6 +557,37 @@
       color: var(--goldenrod);
     }
 
+    .apply-form {
+      max-width: 100%;
+      gap: 10px;
+    }
+    .apply-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .apply-form input,
+    .apply-form textarea {
+      width: 100%;
+      /* the hero/tickets signup sets a 200px floor on its email field; in a
+         two-up grid inside a narrow column that overflows, so clear it here */
+      min-width: 0;
+      flex: none;
+      background: transparent;
+      border: 1px solid var(--field);
+      color: var(--playa);
+      padding: 14px 16px;
+      font: 400 15px/1.4 var(--sans);
+      outline: none;
+    }
+    /* matches .signup input[type="email"]'s specificity, and wins by order */
+    .apply-form input[type="email"] { min-width: 0; flex: none; }
+    .apply-form textarea { margin-top: 10px; resize: vertical; }
+    .apply-form input:focus,
+    .apply-form textarea:focus { border-color: var(--goldenrod); }
+    .apply-form .signup-row { margin-top: 10px; }
+
     /* ---- footer ---- */
     footer { margin-top: auto; }
     .footer-inner {
@@ -565,7 +607,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      color: var(--dim);
+      text-decoration: none;
+      font: inherit;
+      letter-spacing: inherit;
     }
+    .footer-mark:hover { color: var(--playa); }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { color: inherit; text-decoration: none; }
 
@@ -591,7 +638,11 @@
       .oc-logo .oc-dot,
       .oc-logo .oc-ring,
       .oc-logo .oc-x,
-      .oc-logo .oc-off { transition: none; }
+      .oc-logo .oc-off,
+      .tickets-mark,
+      .tickets-mark .oc-dot,
+      .tickets-mark .oc-ring,
+      .tickets-mark .oc-x { transition: none; }
     }
   </style>
 </head>
@@ -714,10 +765,12 @@
     <div class="tickets-inner">
       <div class="centerline"></div>
       <svg class="tickets-mark" viewBox="0 0 150 150" aria-hidden="true">
-        <circle cx="75" cy="75" r="66" fill="none" stroke="#0E0D0B" stroke-width="5"></circle>
-        <line x1="75" y1="0" x2="75" y2="150" stroke="#0E0D0B" stroke-width="3"></line>
-        <line x1="0" y1="75" x2="150" y2="75" stroke="#0E0D0B" stroke-width="3"></line>
-        <circle cx="104" cy="52" r="15" fill="#0E0D0B"></circle>
+        <circle class="oc-ring" cx="75" cy="75" r="66" fill="none" stroke="#0E0D0B" stroke-width="5"></circle>
+        <g class="oc-x">
+          <line x1="75" y1="0" x2="75" y2="150" stroke="#0E0D0B" stroke-width="3"></line>
+          <line x1="0" y1="75" x2="150" y2="75" stroke="#0E0D0B" stroke-width="3"></line>
+        </g>
+        <circle class="oc-dot" cx="104" cy="52" r="15" fill="#0E0D0B"></circle>
       </svg>
 
       <div class="tickets-head">
@@ -749,7 +802,29 @@
         <div class="label">OPEN CALL · CLOSES DEC 1, 2027</div>
         <h2 class="h2">Got a big idea?<br>We've got a lot.</h2>
         <p class="body-copy" style="max-width:38ch">Artists, bands, welders, gardeners. We cover materials, a crew and a place to sleep.</p>
-        <a href="#" class="btn-ghost">APPLY TO BUILD →</a>
+        <a href="#apply" class="btn-ghost" data-apply-toggle aria-expanded="false" aria-controls="apply">APPLY TO BUILD →</a>
+
+        <form id="apply" class="signup apply-form" name="apply" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-signup="apply" novalidate>
+          <input type="hidden" name="form-name" value="apply">
+          <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+
+          <div class="confirm" data-done hidden>APPLICATION IN<br><span class="confirm-note">We read every one. You'll hear from us before the call closes on 1 December 2027.</span></div>
+
+          <div data-open>
+            <div class="apply-grid">
+              <label for="apply-name" hidden>Your name</label>
+              <input id="apply-name" name="name" required placeholder="your name" autocomplete="name">
+              <label for="apply-email" hidden>Email address</label>
+              <input id="apply-email" type="email" name="email" required placeholder="your email" autocomplete="email">
+            </div>
+            <label for="apply-link" hidden>Link to your work</label>
+            <input id="apply-link" name="link" placeholder="link to your work (optional)" autocomplete="url">
+            <label for="apply-idea" hidden>What do you want to build?</label>
+            <textarea id="apply-idea" name="idea" required rows="4" placeholder="what do you want to build, and what would you need?"></textarea>
+            <div class="signup-row"><button type="submit">Send it</button></div>
+            <div class="signup-error" data-error hidden role="alert">That didn't send. Check your connection and try again.</div>
+          </div>
+        </form>
       </div>
       <figure class="photo">
         <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Burning%20Man%202013%20The%20Church%20Trap!%20(9657159731).jpg?width=1600"
@@ -761,15 +836,17 @@
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-mark">
-        <svg width="22" height="22" viewBox="0 0 150 150" aria-hidden="true" style="flex:none">
-          <circle cx="75" cy="75" r="66" fill="none" stroke="#9C978B" stroke-width="5"></circle>
-          <line x1="75" y1="0" x2="75" y2="150" stroke="#9C978B" stroke-width="3"></line>
-          <line x1="0" y1="75" x2="150" y2="75" stroke="#9C978B" stroke-width="3"></line>
-          <circle cx="104" cy="52" r="15" fill="#E8B923"></circle>
+      <a href="#top" class="footer-mark oc-logo" aria-label="Back to top">
+        <svg width="22" height="22" viewBox="0 0 150 150" aria-hidden="true">
+          <circle class="oc-ring" cx="75" cy="75" r="66" fill="none" stroke="currentColor" stroke-width="5"></circle>
+          <g class="oc-x">
+            <line x1="75" y1="0" x2="75" y2="150" stroke="currentColor" stroke-width="3"></line>
+            <line x1="0" y1="75" x2="150" y2="75" stroke="currentColor" stroke-width="3"></line>
+          </g>
+          <circle class="oc-dot" cx="104" cy="52" r="15" fill="#E8B923"></circle>
         </svg>
         <span>OFF CENTER · EDITION 01 · CLEVELAND</span>
-      </div>
+      </a>
       <div class="footer-links">
         <a href="#">INSTAGRAM</a>
         <a href="#">PRESS</a>
@@ -828,15 +905,42 @@
     form.querySelector('[data-done]').hidden = false;
   }
 
+  /* Both marks carry href="#top" so they work without JS, but that anchors the
+     hero — which starts beneath the sticky header, leaving the page 60-odd
+     pixels short of the top. Send them to the real top instead. */
+  document.querySelectorAll('a.oc-logo[href="#top"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* The open call's form stays in the markup so it works without JS; the CTA
+     folds it away and reveals it on click. */
+  var applyToggle = document.querySelector('[data-apply-toggle]');
+  var applyForm = document.getElementById('apply');
+
+  if (applyToggle && applyForm) {
+    applyForm.hidden = true;
+    applyToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var open = applyForm.hidden;
+      applyForm.hidden = !open;
+      applyToggle.setAttribute('aria-expanded', String(open));
+      if (open) applyForm.querySelector('input').focus();
+    });
+  }
+
   document.querySelectorAll('[data-signup]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var input = form.querySelector('input[type="email"]');
       var button = form.querySelector('button[type="submit"]');
       var error = form.querySelector('[data-error]');
 
-      if (!input.value || !input.checkValidity()) { input.reportValidity(); return; }
+      /* checkValidity covers every required field, not just the email */
+      if (!form.checkValidity()) { form.reportValidity(); return; }
 
       error.hidden = true;
       button.disabled = true;
