@@ -193,13 +193,19 @@
     }
 
     .hero-credit {
-      position: absolute;
-      right: var(--gut);
-      bottom: 10px;
-      font: 400 9px/1 var(--mono);
+      text-align: right;
+      margin-top: -16px;
+      font: 400 9px/1.6 var(--mono);
       letter-spacing: .1em;
       color: var(--faint);
     }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2px;
+    }
+    .hero-strip .photo { aspect-ratio: 16 / 9; }
 
     .hero-inner {
       position: relative;
@@ -365,14 +371,7 @@
 
     [hidden] { display: none !important; }
 
-    /* ---- photo band ---- */
-    .photo-band { border-bottom: 1px solid var(--line); }
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2px;
-      background: var(--asphalt);
-    }
+    /* ---- photos ---- */
     .photo {
       position: relative;
       aspect-ratio: 4 / 3;
@@ -582,7 +581,7 @@
       .tickets-form { padding: 32px var(--gut) 0; }
       .tickets-mark { width: 70vw; height: 70vw; right: -18vw; top: -14vw; }
       .countdown { gap: 8px; }
-      .hero-credit { position: static; display: block; padding: 0 var(--gut) 10px; text-align: right; }
+      .hero-strip .photo { aspect-ratio: 1 / 1; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -671,14 +670,10 @@
           </form>
         </div>
       </div>
+      <div class="hero-credit"><a href="https://commons.wikimedia.org/wiki/File:Black_Rock_City_2013_Hyperlapse.webm" target="_blank" rel="license noopener noreferrer">FOOTAGE: BLACK ROCK CITY 2013 HYPERLAPSE · CC BY-SA</a> · <a href="https://commons.wikimedia.org/wiki/File:Burning_Man_aerial.jpg" target="_blank" rel="license noopener noreferrer">STILL: BURNING MAN AERIAL</a> · WIKIMEDIA COMMONS</div>
     </div>
 
-    <div class="hero-credit"><a href="https://commons.wikimedia.org/wiki/File:Black_Rock_City_2013_Hyperlapse.webm" target="_blank" rel="license noopener noreferrer">FOOTAGE: BLACK ROCK CITY 2013 HYPERLAPSE · CC BY-SA</a> · <a href="https://commons.wikimedia.org/wiki/File:Burning_Man_aerial.jpg" target="_blank" rel="license noopener noreferrer">STILL: BURNING MAN AERIAL</a> · WIKIMEDIA COMMONS</div>
-  </section>
-
-  <!-- photo band -->
-  <section class="photo-band">
-    <div class="photo-grid">
+    <div class="hero-strip">
       <figure class="photo">
         <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Central%20Park%20SummerStage%2C%20Manhattan%2C%20New%20York%2C%20US.jpg?width=1600"
              alt="An open-air stage with a crowd gathered in front of it." loading="lazy" decoding="async">
