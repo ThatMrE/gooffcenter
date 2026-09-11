@@ -353,7 +353,7 @@
       letter-spacing: .08em;
       color: var(--goldenrod);
     }
-    .confirm span { color: var(--soft); }
+    .confirm .confirm-note { color: var(--soft); }
 
     .signup-error {
       margin-top: 10px;
@@ -394,6 +394,18 @@
       color: var(--playa);
       text-shadow: 0 1px 3px rgba(14, 13, 11, .9);
     }
+    .photo figcaption a,
+    .hero-credit a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(233, 228, 216, .35);
+    }
+    .photo figcaption a:hover,
+    .hero-credit a:hover {
+      color: var(--goldenrod);
+      border-bottom-color: var(--goldenrod);
+    }
+
     figure { margin: 0; }
 
     /* ---- the week ---- */
@@ -504,60 +516,6 @@
       border: 2px solid var(--asphalt);
       color: var(--asphalt);
     }
-    .tickets-tiers {
-      position: relative;
-      padding: 44px var(--gut) 0 max(var(--gut), 52vw);
-    }
-
-    .tier-picker {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      border: 2px solid var(--asphalt);
-      max-width: 560px;
-    }
-    .tier-btn {
-      flex: 1 1 auto;
-      background: transparent;
-      color: var(--asphalt);
-      border: 0;
-      border-right: 2px solid var(--asphalt);
-      padding: 12px 14px;
-      font: 500 11px/1 var(--mono);
-      letter-spacing: .12em;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .tier-btn:last-child { border-right: 0; }
-    .tier-btn[aria-checked="true"] {
-      background: var(--asphalt);
-      color: var(--goldenrod);
-    }
-    .tier-btn:focus-visible { outline: 2px solid var(--asphalt); outline-offset: 3px; }
-
-    .tier-card {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-width: 560px;
-      padding-top: 22px;
-    }
-    .tier-tag {
-      font: 500 10px/1 var(--mono);
-      letter-spacing: .14em;
-      color: var(--gold-deep);
-    }
-    .tier-name {
-      font: 900 clamp(32px, 4.5vw, 56px)/1 var(--display);
-      letter-spacing: -.04em;
-    }
-    .tier-desc {
-      margin: 0;
-      font: 400 17px/1.5 var(--sans);
-      max-width: 34ch;
-      text-wrap: pretty;
-    }
-
     .tickets-note {
       font: 500 10px/1.5 var(--mono);
       letter-spacing: .12em;
@@ -621,10 +579,7 @@
       .tickets-inner { padding: 64px 0 72px; }
       .tickets-head { padding-left: var(--gut); }
       .tickets-head .h2 { margin-left: 0; }
-      .tickets-tiers { padding: 36px var(--gut) 0; }
-      .tickets-form { padding: 28px var(--gut) 0; }
-      .tier-btn { flex: 1 1 100%; border-right: 0; border-bottom: 2px solid var(--asphalt); }
-      .tier-btn:last-child { border-bottom: 0; }
+      .tickets-form { padding: 32px var(--gut) 0; }
       .tickets-mark { width: 70vw; height: 70vw; right: -18vw; top: -14vw; }
       .countdown { gap: 8px; }
       .hero-credit { position: static; display: block; padding: 0 var(--gut) 10px; text-align: right; }
@@ -703,9 +658,8 @@
           <form class="signup" name="signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-signup="hero" novalidate>
             <input type="hidden" name="form-name" value="signup">
             <input type="hidden" name="source" value="hero">
-            <input type="hidden" name="tier" value="">
             <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
-            <div class="confirm" data-done hidden>YOU'RE IN · № <span data-ticket-no></span><br><span>We'll email you when tickets open in March.</span></div>
+            <div class="confirm" data-done hidden>YOU'RE IN · № <span data-ticket-no></span><br><span class="confirm-note">We'll email you when tickets open in March.</span></div>
             <div data-open>
               <div class="signup-row">
                 <label for="hero-email" hidden>Email address</label>
@@ -719,7 +673,7 @@
       </div>
     </div>
 
-    <div class="hero-credit">FOOTAGE: BLACK ROCK CITY 2013 HYPERLAPSE · WIKIMEDIA COMMONS · CC BY-SA</div>
+    <div class="hero-credit"><a href="https://commons.wikimedia.org/wiki/File:Black_Rock_City_2013_Hyperlapse.webm" target="_blank" rel="license noopener noreferrer">FOOTAGE: BLACK ROCK CITY 2013 HYPERLAPSE · CC BY-SA</a> · <a href="https://commons.wikimedia.org/wiki/File:Burning_Man_aerial.jpg" target="_blank" rel="license noopener noreferrer">STILL: BURNING MAN AERIAL</a> · WIKIMEDIA COMMONS</div>
   </section>
 
   <!-- photo band -->
@@ -728,17 +682,17 @@
       <figure class="photo">
         <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Central%20Park%20SummerStage%2C%20Manhattan%2C%20New%20York%2C%20US.jpg?width=1600"
              alt="An open-air stage with a crowd gathered in front of it." loading="lazy" decoding="async">
-        <figcaption>WIKIMEDIA COMMONS · CC BY</figcaption>
+        <figcaption><a href="https://commons.wikimedia.org/wiki/File:Central_Park_SummerStage,_Manhattan,_New_York,_US.jpg" target="_blank" rel="license noopener noreferrer">WIKIMEDIA COMMONS · CC BY</a></figcaption>
       </figure>
       <figure class="photo">
         <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Yona%20Appletree's%20Dome%20(14960329318).jpg?width=1600"
              alt="People assembling a geodesic dome frame on open ground." loading="lazy" decoding="async">
-        <figcaption>WIKIMEDIA COMMONS · CC BY-SA</figcaption>
+        <figcaption><a href="https://commons.wikimedia.org/wiki/File:Yona_Appletree%27s_Dome_(14960329318).jpg" target="_blank" rel="license noopener noreferrer">WIKIMEDIA COMMONS · CC BY-SA</a></figcaption>
       </figure>
       <figure class="photo">
         <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Musicians%20performing%20on%20stage%20at%20a%20night%20concert%20featuring%20vibrant%20lights%20and%20energetic%20atmosphere.jpg?width=1600"
              alt="Musicians performing on a lit stage at night." loading="lazy" decoding="async">
-        <figcaption>WIKIMEDIA COMMONS · CC BY</figcaption>
+        <figcaption><a href="https://commons.wikimedia.org/wiki/File:Musicians_performing_on_stage_at_a_night_concert_featuring_vibrant_lights_and_energetic_atmosphere.jpg" target="_blank" rel="license noopener noreferrer">WIKIMEDIA COMMONS · CC BY</a></figcaption>
       </figure>
     </div>
   </section>
@@ -775,37 +729,9 @@
         <h2 class="h2">Hold<br>your<br>spot.</h2>
       </div>
 
-      <div class="tickets-tiers">
-        <div class="tier-picker" role="radiogroup" aria-label="Pass type">
-          <button type="button" class="tier-btn" role="radio" aria-checked="true" data-tier="0" aria-controls="tier-0">NEIGHBOR</button>
-          <button type="button" class="tier-btn" role="radio" aria-checked="false" data-tier="1" aria-controls="tier-1">DAY PASS</button>
-          <button type="button" class="tier-btn" role="radio" aria-checked="false" data-tier="2" aria-controls="tier-2">WEEK PASS</button>
-        </div>
-
-        <div class="tier-card" id="tier-0" data-tier-card="0">
-          <div class="tier-tag">LIVE HERE</div>
-          <div class="tier-name">Neighbor</div>
-          <p class="tier-desc">Any Cleveland address. All week, all lots.</p>
-          <div class="tickets-note">BRING ID · UNLIMITED</div>
-        </div>
-        <div class="tier-card" id="tier-1" data-tier-card="1">
-          <div class="tier-tag">DAY</div>
-          <div class="tier-name">Day pass</div>
-          <p class="tier-desc">Pick a day. Pay what you can.</p>
-          <div class="tickets-note">SLIDING SCALE</div>
-        </div>
-        <div class="tier-card" id="tier-2" data-tier-card="2">
-          <div class="tier-tag">WEEK</div>
-          <div class="tier-name">Week pass</div>
-          <p class="tier-desc">All seven days. Pay what you can.</p>
-          <div class="tickets-note">SLIDING SCALE · PAYMENT PLANS</div>
-        </div>
-      </div>
-
       <form class="signup tickets-form" name="signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-signup="tickets" novalidate>
         <input type="hidden" name="form-name" value="signup">
         <input type="hidden" name="source" value="tickets">
-        <input type="hidden" name="tier" value="">
         <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
         <div class="confirm" data-done hidden>YOU'RE IN · № <span data-ticket-no></span><br>We'll email you 48 hours before tickets open.</div>
         <div data-open>
@@ -833,7 +759,7 @@
       <figure class="photo">
         <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Burning%20Man%202013%20The%20Church%20Trap!%20(9657159731).jpg?width=1600"
              alt="A large temporary art structure built by a crew on open ground." loading="lazy" decoding="async">
-        <figcaption>WIKIMEDIA COMMONS · CC BY</figcaption>
+        <figcaption><a href="https://commons.wikimedia.org/wiki/File:Burning_Man_2013_The_Church_Trap!_(9657159731).jpg" target="_blank" rel="license noopener noreferrer">WIKIMEDIA COMMONS · CC BY</a></figcaption>
       </figure>
     </div>
   </section>
@@ -893,29 +819,6 @@
      Posting to the page's own path keeps the confirmation state on screen
      instead of navigating to Netlify's generic success page. */
   var SIGNUP_ACTION = '/';
-
-  /* Pass tiers. All three cards are in the markup so the page still reads
-     without JS; the picker collapses them to the selected one. */
-  var TIER_NAMES = ['NEIGHBOR', 'DAY PASS', 'WEEK PASS'];
-
-  var tierBtns = document.querySelectorAll('.tier-btn');
-  var tierCards = document.querySelectorAll('[data-tier-card]');
-  var tierFields = document.querySelectorAll('input[name="tier"]');
-
-  function pickTier(i, touched) {
-    tierBtns.forEach(function (b) { b.setAttribute('aria-checked', String(Number(b.dataset.tier) === i)); });
-    tierCards.forEach(function (c) { c.hidden = Number(c.dataset.tierCard) !== i; });
-    /* Only report a tier the visitor actually chose — the default selection is
-       ours, not theirs, and a hero signup happens above the picker entirely. */
-    if (touched) {
-      tierFields.forEach(function (f) { f.value = TIER_NAMES[i]; });
-    }
-  }
-
-  tierBtns.forEach(function (b) {
-    b.addEventListener('click', function () { pickTier(Number(b.dataset.tier), true); });
-  });
-  if (tierBtns.length) pickTier(0, false);
 
   var ticketNo = null;
   function nextTicketNo() {
