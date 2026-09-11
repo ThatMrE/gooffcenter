@@ -355,6 +355,14 @@
     }
     .confirm span { color: var(--soft); }
 
+    .signup-error {
+      margin-top: 10px;
+      font: 500 11px/1.5 var(--mono);
+      letter-spacing: .08em;
+      color: var(--rust);
+    }
+    .tickets-form .signup-error { color: var(--asphalt); font-weight: 600; }
+
     [hidden] { display: none !important; }
 
     /* ---- photo band ---- */
@@ -692,12 +700,19 @@
             <div class="cd-cell"><div class="cd-num" id="cd-s">—</div><div class="cd-unit">SEC</div></div>
           </div>
 
-          <form class="signup" data-signup="hero" novalidate>
+          <form class="signup" name="signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-signup="hero" novalidate>
+            <input type="hidden" name="form-name" value="signup">
+            <input type="hidden" name="source" value="hero">
+            <input type="hidden" name="tier" value="">
+            <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
             <div class="confirm" data-done hidden>YOU'RE IN · № <span data-ticket-no></span><br><span>We'll email you when tickets open in March.</span></div>
-            <div class="signup-row" data-open>
-              <label class="sr-only" for="hero-email" hidden>Email address</label>
-              <input id="hero-email" type="email" name="email" required placeholder="your email" autocomplete="email">
-              <button type="submit">Get on the list</button>
+            <div data-open>
+              <div class="signup-row">
+                <label for="hero-email" hidden>Email address</label>
+                <input id="hero-email" type="email" name="email" required placeholder="your email" autocomplete="email">
+                <button type="submit">Get on the list</button>
+              </div>
+              <div class="signup-error" data-error hidden role="alert">That didn't send. Check your connection and try again.</div>
             </div>
           </form>
         </div>
@@ -787,7 +802,11 @@
         </div>
       </div>
 
-      <form class="signup tickets-form" data-signup="tickets" novalidate>
+      <form class="signup tickets-form" name="signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-signup="tickets" novalidate>
+        <input type="hidden" name="form-name" value="signup">
+        <input type="hidden" name="source" value="tickets">
+        <input type="hidden" name="tier" value="">
+        <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
         <div class="confirm" data-done hidden>YOU'RE IN · № <span data-ticket-no></span><br>We'll email you 48 hours before tickets open.</div>
         <div data-open>
           <div class="signup-row">
@@ -795,6 +814,7 @@
             <input id="tickets-email" type="email" name="email" required placeholder="your email" autocomplete="email">
             <button type="submit">Hold my spot</button>
           </div>
+          <div class="signup-error" data-error hidden role="alert">That didn't send. Check your connection and try again.</div>
           <div class="tickets-note" style="margin-top:10px">NO CHARGE NOW · FIRST ON THE LIST, FIRST TO BUY</div>
         </div>
       </form>
@@ -867,30 +887,35 @@
   tick();
   setInterval(tick, 1000);
 
-  /* Signup.
-     Set SIGNUP_ENDPOINT to a URL that accepts POST {"email": "..."} to actually
-     capture addresses. While it is empty the form only shows the confirmation
-     state — nothing is sent or stored anywhere. */
-  var SIGNUP_ENDPOINT = '';
+  /* Signup posts to Netlify Forms: both forms carry name="signup" and
+     data-netlify="true", so the deploy-time scan registers them and every
+     submission lands under the one "signup" form in the Netlify dashboard.
+     Posting to the page's own path keeps the confirmation state on screen
+     instead of navigating to Netlify's generic success page. */
+  var SIGNUP_ACTION = '/';
 
   /* Pass tiers. All three cards are in the markup so the page still reads
      without JS; the picker collapses them to the selected one. */
   var TIER_NAMES = ['NEIGHBOR', 'DAY PASS', 'WEEK PASS'];
-  var pickedTier = TIER_NAMES[0];
 
   var tierBtns = document.querySelectorAll('.tier-btn');
   var tierCards = document.querySelectorAll('[data-tier-card]');
+  var tierFields = document.querySelectorAll('input[name="tier"]');
 
-  function pickTier(i) {
-    pickedTier = TIER_NAMES[i];
+  function pickTier(i, touched) {
     tierBtns.forEach(function (b) { b.setAttribute('aria-checked', String(Number(b.dataset.tier) === i)); });
     tierCards.forEach(function (c) { c.hidden = Number(c.dataset.tierCard) !== i; });
+    /* Only report a tier the visitor actually chose — the default selection is
+       ours, not theirs, and a hero signup happens above the picker entirely. */
+    if (touched) {
+      tierFields.forEach(function (f) { f.value = TIER_NAMES[i]; });
+    }
   }
 
   tierBtns.forEach(function (b) {
-    b.addEventListener('click', function () { pickTier(Number(b.dataset.tier)); });
+    b.addEventListener('click', function () { pickTier(Number(b.dataset.tier), true); });
   });
-  if (tierBtns.length) pickTier(0);
+  if (tierBtns.length) pickTier(0, false);
 
   var ticketNo = null;
   function nextTicketNo() {
@@ -908,18 +933,30 @@
   document.querySelectorAll('[data-signup]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
       var input = form.querySelector('input[type="email"]');
+      var button = form.querySelector('button[type="submit"]');
+      var error = form.querySelector('[data-error]');
+
       if (!input.value || !input.checkValidity()) { input.reportValidity(); return; }
 
-      if (SIGNUP_ENDPOINT) {
-        fetch(SIGNUP_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: input.value, source: form.dataset.signup, tier: pickedTier })
-        }).catch(function () { /* still confirm — we have the address on screen */ });
-      }
+      error.hidden = true;
+      button.disabled = true;
 
-      confirmForm(form);
+      fetch(SIGNUP_ACTION, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          /* Only now has anyone actually been added to anything. */
+          confirmForm(form);
+        })
+        .catch(function () {
+          error.hidden = false;
+          button.disabled = false;
+        });
     });
   });
 })();
